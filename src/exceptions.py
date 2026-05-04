@@ -39,3 +39,35 @@ class TaskSourceValidationError(Exception):
 
     """
     pass
+
+
+class ExecutorErrror(Exception):
+    """
+    Базовое исключение исполнителя
+
+    """
+    pass
+
+
+class TaskProcessingError(ExecutorErrror):
+    """
+    Ошибка обработки задач
+
+    """
+    pass
+
+
+class ExecutorNotStartedError(ExecutorErrror):
+    """
+    Исполнитель не запущен
+    
+    """
+    pass
+
+
+class HandlerNotFoundError(ExecutorErrror):
+    """
+    Обработчик не найден
+    
+    """
+    pass
