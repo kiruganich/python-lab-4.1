@@ -1,10 +1,9 @@
 from __future__ import annotations
-from typing import Any, Protocol, runtime_checkable
+from typing import Any, Protocol, Awaitable, runtime_checkable
 import logging
 import asyncio
 
 from src.task import Task
-from src.exceptions import TaskIDError
 
 logger = logging.getLogger(__name__)
 
@@ -12,7 +11,7 @@ logger = logging.getLogger(__name__)
 @runtime_checkable
 class TaskHandler(Protocol):
 
-    def handle(self, task: Task) -> Any:
+    def handle(self, task: Task) -> Awaitable[Any]:
         """Метод обработки задачи"""
         ...
 
@@ -31,7 +30,7 @@ class TransformHandler(TaskHandler):
     async def handle(self, task: Task) -> str:
         await asyncio.sleep(task.priority * 0.03)
         
-        original_payload = task.payload
+        original_payload = task.payload 
         transformed = original_payload.upper()
 
         task.payload = transformed
